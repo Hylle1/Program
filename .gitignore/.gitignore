@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _4._5__jó_
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int a,counter=0;
+            double csoportos = 0, intézmény = 0, diák = 0, legjobb = 0,b;
+            string legjobb2 = "",szöveg="";
+            do
+                {
+
+                if (counter >= 1)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    szöveg="(Legalább 1)";
+                }
+                Console.WriteLine("Kérem adja meg, hogy hány gyerek szeretne menni {0}: ",szöveg);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                a = Convert.ToInt32(Console.ReadLine());
+                counter++;
+            }  while (a < 1);
+
+            counter = 0;
+            szöveg = "";
+
+            do
+                {
+
+                if (counter >= 1)
+                {
+                    Console.BackgroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    szöveg = "(minimum 1FT)";
+                }
+                Console.WriteLine("Kérem adja meg mennyibe kerül egy gyereknek a jegy {0}: ",szöveg);
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+
+                b = Convert.ToDouble(Console.ReadLine());
+                counter++;
+            } while (b <= 0);
+
+
+            if (a < 10) csoportos = a * b;
+            if (a >= 10 && a <= 19) csoportos = (a * b) * 0.95;
+            if (a >= 20 && a <= 29) csoportos = (a * b) * 0.92;
+            if (a >= 30 && a <= 40) csoportos = (a * b) * 0.88;
+            if (a > 40) csoportos = (a * b) * 0.86;
+
+            if (a < 5) intézmény = a * b;
+            if (a >= 5  && a <= 11) intézmény = (a * b) - b;
+            if (a >= 12 && a <= 19) intézmény = (a * b) - 2 * b;
+            if (a >= 20 && a <= 28) intézmény = (a * b) - 3 * b;
+            if (a >= 29 && a <= 40) intézmény = (a * b) - 4 * b;
+            if (a > 40) intézmény = (a * b) - 5 * b;
+
+            diák = a * (b - 10);
+
+            if (csoportos < intézmény && csoportos < diák) { legjobb2 = "a csoportos"; legjobb = csoportos; }
+            if (intézmény < csoportos && intézmény < diák) { legjobb2 = "az inntézményes"; legjobb = intézmény; }
+            if (diák < intézmény && diák < csoportos) { legjobb2 = "a diák"; legjobb = diák; }
+
+            Console.WriteLine("A legakciósabb {0} kedvezménnyel, amivel {1}-FTba kerül", legjobb2, Math.Round(legjobb));
+            Console.ReadKey();
+        }
+    }
+}
